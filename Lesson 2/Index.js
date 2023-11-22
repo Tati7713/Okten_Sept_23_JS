@@ -262,7 +262,7 @@ if (a > b) {
 
 let xx = prompt('Введіть будь-яке значення:');
 
-if (xx === 0 || xx === '' || xx === 'NaN' || xx === null || xx === 'undefined') {
+if (xx === 0 || xx === '' || xx === 'NaN' || xx === null || xx === 'undefined' || xx === 'false') {
     console.log('Default')
 } else {
     console.log('Das ist gut, mein Freund!')
