@@ -1,0 +1,14 @@
+.product-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.product-title {
+    font-size: 30px;
+    color: darkred;
+}
+.product-image {
+    width: 200px;
+    height: 250px;
+}
