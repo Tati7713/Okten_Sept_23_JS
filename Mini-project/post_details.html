@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post details</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- + 7 Вивести всю, без виключення, інформацію про об'єкт post на який клікнули .-->
+<!-- + 8 Нижчє інформаці про пост, вивести всі коментарі поточного поста (ендпоінт  - https://jsonplaceholder.typicode.com/posts/POST_ID/comments)-->
+<!--блок з інфою про пост зверху. Коментарі - по 4 в ряд.-->
+<!--Всі елементи котрі характеризують users, posts, comments візуалізувати, так, щоб було видно що це блоки (дати фон. марджини і тд)-->
+
+<script>
+
+    let url = new URL (location.href);
+    let data = url.searchParams.get('data');
+    let post = JSON.parse(data)
+
+    let generalDiv = document.createElement('div')
+    generalDiv.classList.add('generalDiv')
+    document.body.appendChild(generalDiv)
+
+    let postDiv = document.createElement('div')
+    postDiv.classList.add('postDiv')
+    postDiv.innerText = 'User ID: ' + post.userId + '\n' + 'Post ID: ' + post.id + '\n' + 'Title: ' + post.title + '\n' + 'Text: ' + post.body
+
+    let boxComments = document.createElement('div')
+    boxComments.classList.add('boxComments')
+
+    generalDiv.append(postDiv, boxComments)
+
+
+    fetch('https://jsonplaceholder.typicode.com/posts/' + post.id + '/comments')
+    .then(value => value.json())
+    .then(comments => {
+        for (let comment of comments) {
+            let blockComment = document.createElement('div')
+            blockComment.classList.add('blockComment')
+            blockComment.innerText = 'Post ID: ' + comment.postId + '\n' + 'Comment ID: ' + comment.id + '\n' + 'Name: ' + comment.name + '\n' + 'Email: ' + comment.email + '\n' + 'Comment: ' + comment.body
+            boxComments.appendChild(blockComment)
+        }
+    })
+
+</script>
+
+</body>
+</html>

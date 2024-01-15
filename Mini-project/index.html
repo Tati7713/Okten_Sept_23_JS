@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- + 1 отримати масив об'єктів з endpoint`а https://jsonplaceholder.typicode.com/users-->
+<!-- + 2 Вивести id,name всіх user в index.html. Окремий блок для кожного user.-->
+<!-- + 3 Додати кожному блоку кнопку/посилання , при кліку на яку відбувається перехід  на сторінку user-details.html,
+котра має детальну інфорацію про об'єкт на який клікнули-->
+
+<!--всі блоки з user - по 2 в рядок. кнопки/аосилвння розташувати під інформацією про user.-->
+<!--Всі елементи котрі характеризують users, posts, comments візуалізувати, так, щоб було видно що це блоки (дати фон. марджини і тд)-->
+
+<script>
+
+    let generalDiv = document.createElement('div')
+    generalDiv.classList.add('generalDiv')
+    document.body.appendChild(generalDiv)
+
+    let centralDiv = document.createElement('div')
+    centralDiv.classList.add('centralDiv')
+    generalDiv.appendChild(centralDiv)
+
+    fetch('https://jsonplaceholder.typicode.com/users')
+    .then(value => value.json())
+    .then(users => {
+        for (let user of users) {
+
+            let userBlock = document.createElement('div')
+            userBlock.classList.add('userBlock')
+            centralDiv.appendChild(userBlock)
+
+            let h3 = document.createElement('h3')
+            h3.innerText = 'ID: ' + user.id + '\n' + 'User name: ' + user.name
+
+            let btnDetails = document.createElement('button')
+            btnDetails.classList.add('btnDetails')
+            btnDetails.innerText = 'Details'
+            btnDetails.onclick = () => {
+                window.location.href = 'user_details.html?data='+JSON.stringify(user)
+            }
+            userBlock.append(h3, btnDetails)
+        }
+    }
+    )
+
+</script>
+
+</body>
+</html>
